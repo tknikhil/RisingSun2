@@ -5,6 +5,8 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import HomeScreen from './screen/HomeScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import DrawerScreen from './screen/DrawerScreen';
+import ProductsScreen from './screen/ProductsScreen';
+import CustomersScreen from './screen/CustomersScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -13,7 +15,9 @@ const App = () => {
     <GestureHandlerRootView style={styles.root}>
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="DrawerScreen" component={DrawerScreen} />
+        <Stack.Screen name="Home" component={HomeScreen}/>
+        <Stack.Screen name="Products" component={ProductsScreen} />
+        <Stack.Screen name="Customers" component={CustomersScreen} />
         
         {/* <Stack.Screen name='CustRegistration' component={CustRegisteration} />
         <Stack.Screen name='PersonalDetail' component={PersonalDetail} />

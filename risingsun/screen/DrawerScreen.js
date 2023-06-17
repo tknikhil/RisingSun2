@@ -5,7 +5,7 @@ import HomeScreen from './HomeScreen'
 const DrawerScreen = () => {
   return (
     <View style={{flex:1,backgroundColor:'#00AFF0'}}>
-    <HomeScreen/>
+    {<HomeScreen/>}
     </View>
   )
 }
