@@ -12,7 +12,6 @@ import React, {useState, useRef} from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import ProductsScreen from './ProductsScreen';
 import CustomersScreen from './CustomersScreen';
-import  Reanimated  from 'react-native-reanimated';
 // import { timing,Value } from 'react-native-reanimated';
 
 const HomeScreen = ({navigation}) => {
@@ -29,7 +28,7 @@ const HomeScreen = ({navigation}) => {
   const renderSelectedScreen = () => {
     switch (menu[selectedMenuItem].title) {
       case 'Products':
-        return <Reanimated><ProductsScreen /></Reanimated>; // Render the ProductsScreen component for the 'Products' menu item
+        return <ProductsScreen />; // Render the ProductsScreen component for the 'Products' menu item
       case 'Customers':
         return <CustomersScreen />; // Render the CustomersScreen component for the 'Customers' menu item
       // Add cases for other menu items as needed

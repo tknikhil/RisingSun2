@@ -1,7 +1,7 @@
-import { View, Animated } from 'react-native'
-import React from 'react'
-import { GestureHandlerRootView, PanGestureHandler } from 'react-native-gesture-handler'
-import { useAnimatedGestureHandler, useAnimatedStyle, useSharedValue } from 'react-native-reanimated'
+import { View, Animated } from 'react-native';
+import React from 'react';
+import { GestureHandlerRootView, PanGestureHandler } from 'react-native-gesture-handler';
+import { useAnimatedGestureHandler, useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
 
 
 const ProductsScreen = () => {
@@ -36,14 +36,14 @@ const ProductsScreen = () => {
               }}
             >
               <Animated.View
-                style={[
-                  {
-                    width: '100%',
-                    height: '100%',
-                    backgroundColor: 'white'
-                  },
+                style={
+                  // {
+                  //   width: '100%',
+                  //   height: '100%',
+                  //   backgroundColor: 'white'
+                  // },
                   animatedStyle
-                ]}
+                }
               />
             </Animated.View>
           </PanGestureHandler>
