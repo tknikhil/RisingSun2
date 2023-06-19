@@ -1,0 +1,26 @@
+{
+    "products": [
+      {
+        "productName": "Product A",
+        "productPrice": 10.99,
+        "productId": "ABC123"
+      },
+      {
+        "productName": "Product B",
+        "productPrice": 19.99,
+        "productId": "DEF456"
+      },
+      {
+        "productName": "Product C",
+        "productPrice": 5.99,
+        "productId": "GHI789"
+      }
+    ]
+}
+
+  
+  
+  
+  
+  
+  

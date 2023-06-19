@@ -1,55 +1,92 @@
-import { View, Animated } from 'react-native';
-import React from 'react';
-import { GestureHandlerRootView, PanGestureHandler } from 'react-native-gesture-handler';
-import { useAnimatedGestureHandler, useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
-
+import { View, Animated, PanResponder, Text, FlatList } from 'react-native';
+import React, { useRef } from 'react';
 
 const ProductsScreen = () => {
-    const animation = useSharedValue(0)
+  const animation = useRef(new Animated.Value(0)).current;
 
-    const gestureHandler = useAnimatedGestureHandler({
-      onStart: (event, ctx) => {
-        ctx.startX = animation.value
-      },
-      onActive: (event, ctx) => {
-        animation.value = ctx.startX + event.translationX
-      },
-      onEnd: (event, ctx) => {}
+  const panResponder = useRef(
+    PanResponder.create({
+      onStartShouldSetPanResponder: () => true,
+      onPanResponderMove: Animated.event([null, { dx: animation }], {
+        useNativeDriver: false,
+      }),
+      onPanResponderRelease: () => {},
     })
-  
-    const animatedStyle = useAnimatedStyle(() => {
-      return {
-        transform: [{ translateX: animation.value }]
-      }
-    })
-  
-    return (
-      <GestureHandlerRootView style={{ flex: 1 }}>
+  ).current;
+
+  const animatedStyle = {
+    transform: [{ translateX: animation }],
+  };
+
+  const products = [
+    {
+      productName: 'Product A',
+      productPrice: 10.99,
+      productId: 'ABC123',
+    },
+    {
+      productName: 'Product B',
+      productPrice: 19.99,
+      productId: 'DEF456',
+    },
+    {
+      productName: 'Product C',
+      productPrice: 5.99,
+      productId: 'GHI789',
+    },
+  ];
+
+  const renderItem = ({ item }) => (
+    <Animated.View
+      style={[
+        {
+          backgroundColor: 'green',
+          elevation: 5,
+          width: '100%',
+          height: 100,
+          marginBottom: 20,
+        },
+      ]}
+      {...panResponder.panHandlers}
+    >
+    
+      <Animated.View
+        style={[
+          {
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'white',
+          },
+          animatedStyle,
+        ]}
+      >
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <PanGestureHandler onGestureEvent={gestureHandler}>
-            <Animated.View
-              style={{
-                backgroundColor: 'green',
-                elevation: 5,
-                width: '100%',
-                height: 100
-              }}
-            >
-              <Animated.View
-                style={
-                  // {
-                  //   width: '100%',
-                  //   height: '100%',
-                  //   backgroundColor: 'white'
-                  // },
-                  animatedStyle
-                }
-              />
-            </Animated.View>
-          </PanGestureHandler>
+          <Text>
+            <Text style={{ fontWeight: 'bold' }}>Product Name: </Text>
+            {item.productName}
+          </Text>
+          <Text>
+            <Text style={{ fontWeight: 'bold' }}>Product Price: </Text>
+            ${item.productPrice}
+          </Text>
+          <Text>
+            <Text style={{ fontWeight: 'bold' }}>Product ID: </Text>
+            {item.productId}
+          </Text>
         </View>
-      </GestureHandlerRootView>
-    )
-}
+      </Animated.View>
+    </Animated.View>
+  );
 
-export default ProductsScreen
+  return (
+    <View style={{ flex: 1 }}>
+      <FlatList
+        data={products}
+        renderItem={renderItem}
+        keyExtractor={(item, index) => index.toString()}
+      />
+    </View>
+  );
+};
+
+export default ProductsScreen;
